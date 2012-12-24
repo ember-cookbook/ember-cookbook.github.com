@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Recipe Template</title>
+    <title>Ember.js Cookbook &raquo; URL Namespace</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -13,33 +13,32 @@
 
       <section class="content">
 
-        <article class="content-block"><h2 id='sample_recipe_template'>Sample recipe template</h2>
+        <article class="content-block recipe-content">
+          <h1>URL Namespace</h1>
+          <h2 id='problem'>Problem</h2>
 
-<p>Create a new <code>my-recipe.md</code> file and use this text as a start.</p>
-<div class='highlight'><pre><code class='text'>---
-layout: recipe
-title: Title of The Recipe
-chapter: Chapter Name
----
-## Problem
+<p>When accessing a remote API (e.g RESTAdapter), Ember.js will use the URL&#8217;s root, which means that the <code>Post</code> model would automatically map to <code>/posts</code>.</p>
 
-You have a problem.
+<p>Sometimes, you need a customized URL namespace. You may want all the app&#8217;s URL routes to map to <code>/superadmin</code>, for instance. So, instead of <code>/persons</code>, Ember.js would hit <code>/superadmin/persons</code> automatically.</p>
 
-## Solution
+<h2 id='solution'>Solution</h2>
 
-Do this about it.
+<p>Under your REST adapter definition, add the <code>namespace</code> key like the following:</p>
 
-## Discussion
+<pre><code>App.store = DS.Store.create({
+  adapter: DS.RESTAdapter.create({
+    namespace: &#39;superadmin&#39;
+  })
+});</code></pre>
 
-Here&#39;s why.
-</code></pre></div></article>
+<p>From now on, every call to the server will preppend <code>/superadmin</code> in the URL.</p>
+        </article>
 
-        <footer class="footer content-block">
-          <p>Don't see a recipe you want? See an entire missing chapter? Add it yourself by reading the <a href="/contributing">Contributor's Guide</a>, or request it by adding it to <a href="/wanted-recipes">Wanted Recipes</a>.</p>
+        <footer class="footer">
+          <p>Is this recipe wrong, incomplete, or non idiomatic? Help fix it by reading the <a href="/contributing">Contributor's Guide</a>!</p>
           <p>This book is a fork of the original <a href="http://coffeescriptcookbook.com/">Coffeescript Cookbook</a></p>
           <a href="/license"><img src="/images/cc_by_badge.png" /></a>
         </footer>
-
       </section>
 
     </section>
@@ -168,7 +167,7 @@ Here&#39;s why.
                 
                   
                     
-                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/ember_data/url_namespace">URL Namespace</a></li>
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/ember_data/url_namespace">URL Namespace</a></li>
                     
                   
                 
