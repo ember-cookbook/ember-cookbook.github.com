@@ -8,9 +8,9 @@ The Cookbook needs your help!
 
 Here's the Contribution Recipe:
 
-1. Fork the repository at [https://github.com/coffeescript-cookbook/coffeescript-cookbook.github.com](https://github.com/coffeescript-cookbook/coffeescript-cookbook.github.com)
+1. Fork the repository at [https://github.com/ember-cookbook/ember-cookbook.github.com](https://github.com/ember-cookbook/ember-cookbook.github.com)
 2. Do awesomeness!
-3. Send a pull request to coffeescript-cookbook
+3. Send a pull request to ember-cookbook.
 4. If we merge your pull request, you get commit access. BAM. Go back to step 2 and stay there as long as you want.
 
 ## Wanted Recipes

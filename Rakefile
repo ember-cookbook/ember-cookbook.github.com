@@ -1,3 +1,9 @@
+# This file is taken from
+# https://github.com/jcrawford/jcrawford.github.com/blob/dev/Rakefile
+#
+# Big thanks for helping me make this work with Github Pages
+
+
 # prompt user for a commit message; default: HEAD commit 1-liner
 def commit_message
   last_commit = `git log -1 --pretty=format:"%s"`.chomp.strip
@@ -11,7 +17,7 @@ def commit_message
   mesg.gsub(/'/, '') # to allow this to be handed off via -m '#{message}'
 end
 
-desc "Deploy to http://jcrawford.github.com"
+desc "Deploy to http://ember-cookbook.github.com"
 task :deploy do
   mesg = commit_message
 
