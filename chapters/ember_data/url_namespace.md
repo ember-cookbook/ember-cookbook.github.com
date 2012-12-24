@@ -17,10 +17,12 @@ would hit `/superadmin/persons` automatically.
 
 Under your REST adapter definition, add the `namespace` key like the following:
 
-    App.store = DS.Store.create({
-      adapter: DS.RESTAdapter.create({
-        namespace: 'superadmin'
-      })
-    });
+{% highlight javascript %}
+App.store = DS.Store.create({
+  adapter: DS.RESTAdapter.create({
+    namespace: 'superadmin'
+  })
+});
+{% endhighlight %}
 
 From now on, every call to the server will preppend `/superadmin` in the URL.

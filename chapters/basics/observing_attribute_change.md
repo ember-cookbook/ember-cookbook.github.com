@@ -14,7 +14,7 @@ A simple way to do that is by using **observers**.
 {% highlight javascript %}
 App.SearchBox = Ember.TextField.extend({
 
-  valueChanged:function () {
+  valueChanged: function () {
     console.log("search query changed to " + this.get("value"));
   }.observes("value")
 
