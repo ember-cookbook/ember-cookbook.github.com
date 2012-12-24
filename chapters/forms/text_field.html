@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Custom Models Pluralization</title>
+    <title>Ember.js Cookbook &raquo; Text field</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -14,25 +14,38 @@
       <section class="content">
 
         <article class="content-block recipe-content">
-          <h1>Custom Models Pluralization</h1>
+          <h1>Text field</h1>
           <h2 id='problem'>Problem</h2>
 
-<p>When accessing a remote API (e.g RESTAdapter), Ember.js uses the model name plural, which means that the <code>Post</code> model would automatically map to <code>/posts</code>.</p>
-
-<p>Sometimes, you need a customized plural. You may want the Person model to map to <code>/people</code> instead of <code>/persons</code>.</p>
+<p>You need to create a two way data binding for a text field</p>
 
 <h2 id='solution'>Solution</h2>
 
-<p>Under your adapter definition, add the <code>plurals</code> containing a hash with whatever model names you want to customize:</p>
-<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>store</span> <span class='o'>=</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>Store</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
-  <span class='nx'>adapter</span><span class='o'>:</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>RESTAdapter</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
-    <span class='nx'>plurals</span><span class='o'>:</span> <span class='p'>{</span>
-      <span class='s1'>&#39;person&#39;</span><span class='o'>:</span> <span class='s1'>&#39;people&#39;</span>
-    <span class='p'>}</span>
-  <span class='p'>})</span>
+<p>Use <code>Ember.TextField</code> class either directly, or by subclassing</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>burger</span> <span class='o'>=</span> <span class='nx'>Em</span><span class='p'>.</span><span class='nb'>Object</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
+  <span class='nx'>name</span><span class='o'>:</span> <span class='kc'>null</span>
 <span class='p'>});</span>
+</code></pre></div><div class='highlight'><pre><code class='html'>{{view Ember.TextField valueBinding=&quot;App.burger.name&quot;}}
+<span class='nt'>&lt;label&gt;</span>value of {{App.burger.name}}<span class='nt'>&lt;/label&gt;</span>
 </code></pre></div>
-<p>Although the model name is <code>Person</code>, use <code>person</code> as the hash key.</p>
+<p><a href='http://jsfiddle.net/darthdeus/qgpK8/1/'>Here&#8217;s a JSFiddle</a></p>
+
+<h3 id='subclassing'>Subclassing</h3>
+
+<p>You can also subclass your own view from <code>Ember.TextField</code></p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>BurgerView</span> <span class='o'>=</span> <span class='nx'>Em</span><span class='p'>.</span><span class='nx'>TextField</span><span class='p'>.</span><span class='nx'>extend</span><span class='p'>({});</span>
+
+<span class='nx'>App</span><span class='p'>.</span><span class='nx'>burger</span> <span class='o'>=</span> <span class='nx'>Em</span><span class='p'>.</span><span class='nb'>Object</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
+  <span class='nx'>name</span><span class='o'>:</span> <span class='kc'>null</span> <span class='c1'>// it is always a good practice to initialize attributes with null</span>
+<span class='p'>});</span>
+</code></pre></div><div class='highlight'><pre><code class='html'><span class='nt'>&lt;label&gt;</span>
+  Name your burger:
+  {{view App.BurgerView valueBinding=&quot;App.burger.name&quot;}}
+<span class='nt'>&lt;/label&gt;</span>
+
+<span class='nt'>&lt;div&gt;</span>and his name is: &quot;{{App.burger.name}}&quot;<span class='nt'>&lt;/div&gt;</span>
+</code></pre></div>
+<p><a href='http://jsfiddle.net/darthdeus/qgpK8/2/'>Here&#8217;s a JSFiddle</a></p>
         </article>
 
         <footer class="footer">
@@ -176,7 +189,7 @@
                 
                   
                     
-                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/forms/text_field">Text field</a></li>
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/forms/text_field">Text field</a></li>
                     
                   
                 
@@ -233,7 +246,7 @@
                 
                   
                     
-                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/ember_data/custom_models_pluralization">Custom Models Pluralization</a></li>
+                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/ember_data/custom_models_pluralization">Custom Models Pluralization</a></li>
                     
                   
                 
