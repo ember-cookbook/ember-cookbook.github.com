@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Ember Data</title>
+    <title>Ember.js Cookbook &raquo; Debugging</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -13,65 +13,31 @@
 
       <section class="content">
 
-        <article class="content-block">
-          <h2>Ember Data</h2>
-          
+        <article class="content-block recipe-content">
+          <h1>Debugging</h1>
+          <h2 id='debugging_checklist'>Debugging checklist</h2>
 
+<p>Make sure you didn&#8217;t specify <code>id</code> as an attribute in your model</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>User</span> <span class='o'>=</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>Model</span><span class='p'>.</span><span class='nx'>extend</span><span class='p'>({</span>
+  <span class='c1'>// THIS IS WRONG!</span>
+  <span class='nx'>id</span><span class='o'>:</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>attr</span><span class='p'>(</span><span class='s2'>&quot;string&quot;</span><span class='p'>),</span>
 
-<ul>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</ul>
-
+  <span class='nx'>username</span><span class='o'>:</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>attr</span><span class='p'>(</span><span class='s2'>&quot;string&quot;</span><span class='p'>)</span>
+<span class='p'>});</span>
+</code></pre></div>
+<p>the model should look like this instead</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>User</span> <span class='o'>=</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>Model</span><span class='p'>.</span><span class='nx'>extend</span><span class='p'>({</span>
+  <span class='nx'>username</span><span class='o'>:</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>attr</span><span class='p'>(</span><span class='s2'>&quot;string&quot;</span><span class='p'>)</span>
+<span class='p'>});</span>
+</code></pre></div>
+<p>since Ember Data will handle the <code>id</code> automatically.</p>
         </article>
 
-        <footer class="footer content-block">
-          <p>Don't see the recipe you want? Add it yourself by reading the <a href="/contributing">Contributor's Guide</a>, or request it by adding it to <a href="/wanted-recipes">Wanted Recipes</a>.</p>
+        <footer class="footer">
+          <p>Is this recipe wrong, incomplete, or non idiomatic? Help fix it by reading the <a href="/contributing">Contributor's Guide</a>!</p>
           <p>This book is a fork of the original <a href="http://coffeescriptcookbook.com/">Coffeescript Cookbook</a></p>
           <a href="/license"><img src="/images/cc_by_badge.png" /></a>
         </footer>
-
       </section>
 
     </section>
@@ -80,8 +46,7 @@
 
       <section class="sidebar-block block-short">
         <nav class="navigation pages-nav home-nav">
-          <h6><a class="nav-link" href="/"><span
-                class="entypo">&oacute;</span>Ember.js Cookbook</a></h6>
+          <h6><a class="nav-link" href="/"><span class="entypo">&oacute;</span>Ember.js Cookbook</a></h6>
           <small class="thin dimmed">(last updated 24 December, 2012)</small>
         </nav>
       </section>
@@ -158,6 +123,8 @@
                 
                   
                 
+                  
+                
               </ul>
             </li>
           
@@ -177,6 +144,14 @@
                 
                   
                 
+                  
+                    
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/ember_data/debugging">Debugging</a></li>
+                    
+                  
+                
+                  
+                    
                   
                 
                   
