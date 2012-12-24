@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: Debuggin
+title: Debugging
 chapter: Ember Data
 ---
 
