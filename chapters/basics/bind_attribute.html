@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Developer's Guide</title>
+    <title>Ember.js Cookbook &raquo; Bind attribute</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -13,62 +13,30 @@
 
       <section class="content">
 
-        <article class="content-block"><h1 id='developers_guide'>Developer&#8217;s Guide</h1>
+        <article class="content-block recipe-content">
+          <h1>Bind attribute</h1>
+          <h2 id='problem'>Problem</h2>
 
-<p><em>Please help out by updating this page</em></p>
+<p>You need to data-bind a tag attribute, however <code>&lt;img src=&quot;{{foo}}&quot;&gt;</code> doesn&#8217;t work.</p>
 
-<h3 id='operating_system'>Operating System</h3>
+<h2 id='solution'>Solution</h2>
 
-<p>It works on Mac OSX. Probably works without any changes or issues on linux. A masochist could probably get it working on Windows.</p>
+<p>The reason why the above doesn&#8217;t work is because <code>{{foo}}</code> will insert metamorph tags, which results in the following</p>
 
-<h2 id='installation'>Installation</h2>
+<pre><code>&lt;script id=&quot;metamorph-0-start&quot; type=&quot;text/x-placeholder&quot;&gt;&lt;/script&gt;
+http://example.com/foo.png
+&lt;script id=&quot;metamorph-0-end&quot; type=&quot;text/x-placeholder&quot;&gt;&lt;/script&gt;</code></pre>
 
-<h3 id='clone_the_repo'>Clone the repo</h3>
-<div class='highlight'><pre><code class='bash'>git clone git://github.com/coffeescript-cookbook/coffeescript-cookbook.github.com.git
-</code></pre></div>
-<h3 id='create_a_ruby_gemset'>Create a Ruby Gemset</h3>
+<p>What you want to do instead is use <code>{{bindAttr foo}}</code>, which outputs the following</p>
 
-<p>Optional, but highly recommended.</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span>rvm gemset create jekyll
-<span class='nv'>$ </span><span class='nb'>echo</span> <span class='s1'>&#39;rvm gemset use jekyll&#39;</span> &gt;&gt; .rvmrc
-</code></pre></div>
-<h3 id='install_required_gems'>Install Required Gems</h3>
-<div class='highlight'><pre><code class='bash'>gem install jekyll   <span class='c'># needed for testing building the site</span>
-gem install RedCloth <span class='c'># needed for .md rendering</span>
-gem install serve    <span class='c'># needed for resolving .html files w/o extension</span>
-gem install thin     <span class='c'># optional; more efficient webserver than Webrick but not strictly necessary</span>
-</code></pre></div>
-<h3 id='install_pygments'>Install pygments</h3>
+<pre><code>&lt;img src=&quot;http://example.com/foo.png&quot; data-bindattr-1=&quot;1&quot;&gt;</code></pre>
+        </article>
 
-<p>You&#8217;ll need python installed for this. Macs and most linuces come with it preinstalled.</p>
-<div class='highlight'><pre><code class='bash'>easy_install pygments   <span class='c'># for syntax highlighting</span>
-</code></pre></div>
-<h2 id='building_and_viewing_the_website'>Building and Viewing the Website</h2>
-
-<h3 id='run_jekyll'>Run jekyll</h3>
-
-<p>Open a terminal window, cd into the project folder and run jekyll from the project root.</p>
-<div class='highlight'><pre><code class='bash'>jekyll --auto
-</code></pre></div>
-<p>Leave this window running while you work. Any time you change a file, jekyll will rerender it into the <code>_site</code> folder.</p>
-
-<h3 id='run_serve'>Run serve</h3>
-
-<p>Open another terminal window, cd into the project folder, then cd into the <code>_site</code> subfolder, and run</p>
-<div class='highlight'><pre><code class='bash'>serve
-</code></pre></div>
-<p>This will start a webserver in the <code>_site</code> folder. Open a browser and visit <code>http://localhost:4000/</code> and you should see the site.</p>
-
-<h2 id='minutiae_and_other_trivialities'>Minutiae and Other Trivialities</h2>
-
-<p>jekyll can take a second or two to catch up when you save a file. If you edit a file and don&#8217;t see the changes in your browser, give it a second or two and try again. You may also see Maruku warnings, but as long as it prints <code>Successfully generated site</code> you should be alright.</p></article>
-
-        <footer class="footer content-block">
-          <p>Don't see a recipe you want? See an entire missing chapter? Add it yourself by reading the <a href="/contributing">Contributor's Guide</a>, or request it by adding it to <a href="/wanted-recipes">Wanted Recipes</a>.</p>
+        <footer class="footer">
+          <p>Is this recipe wrong, incomplete, or non idiomatic? Help fix it by reading the <a href="/contributing">Contributor's Guide</a>!</p>
           <p>This book is a fork of the original <a href="http://coffeescriptcookbook.com/">Coffeescript Cookbook</a></p>
           <a href="/license"><img src="/images/cc_by_badge.png" /></a>
         </footer>
-
       </section>
 
     </section>
@@ -114,7 +82,7 @@ gem install thin     <span class='c'># optional; more efficient webserver than W
                 
                   
                     
-                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/basics/bind_attribute">Bind attribute</a></li>
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/basics/bind_attribute">Bind attribute</a></li>
                     
                   
                 
