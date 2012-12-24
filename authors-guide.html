@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Ember.js Cookbook &raquo; Author's Guide</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+  </head>
+  <body>
+
+    <section class="container">
+
+      <section class="content">
+
+        <article class="content-block"><h1 id='authors_guide'>Author&#8217;s Guide</h1>
+
+<h2 id='tldr_look_at_other_recipes_and_blend_in'>tl;dr: Look at Other Recipes, and Blend In</h2>
+
+<p>Look at the source of other recipe pages and follow that page structure. Start with the <a href='/developers-guide'>Developer&#8217;s Guide</a> to get a test version of the cookbook up and running on your machine, and get to work!</p>
+
+<h2 id='general_guidelines'>General Guidelines</h2>
+
+<ul>
+<li>Feel free to add new pages, or even chapters. Just keep them organized. <em>(See &#8220;How to Add a Chapter&#8221; below)</em></li>
+
+<li>Try to write well-styled, idiomatic CoffeeScript.</li>
+
+<li>Try to stay within the Problem/Solution/Discussion format. If you can&#8217;t think of a good problem for your recipe&#8230; hang onto it for a while.</li>
+
+<li>Sharing code that you think might only be used rarely is fine. Sharing esoteric code tricks is less so. There&#8217;s a difference between sharing a translator for an obscure format and sharing a weird bit-shifting trick that does fast but inaccurate multiplication.</li>
+
+<li>Don&#8217;t forget to add your name to the authors page!</li>
+</ul>
+
+<h2 id='use_cookbook_problemsolutiondiscussion_format'>Use Cookbook Problem/Solution/Discussion Format</h2>
+
+<p>A typical cookbook page will have three sections (four if you count the title):</p>
+
+<ul>
+<li><strong>Problem</strong> A one- or two-sentence description of the problem, such as &#8220;You want to access parts of a string&#8221; or &#8220;You want to format a floating point number as currency, with a leading dollar sign, two digits of precision and comma-separated triples.&#8221; Where possible, phrase the problem as though speaking directly to the reader: &#8220;You want to&#8230;&#8221;, &#8220;You have an X but you want a Y&#8221;, etc.</li>
+
+<li><strong>Solution</strong> State the solution as briefly as possible, ideally as a single sentence that identifies the strategy you would use, and give example code. It&#8217;s tempting to explain the solution, but don&#8217;t do it yet. Remember that the reader will look this solution up many times after the first time, and that they will be looking for a quick reference each time. You&#8217;re going to explain the solution in the <strong>Discussion</strong>, and the first time reader will read your solution, think about it, and then proceed to the discussion if necessary. For example, for &#8220;accessing parts of a string&#8221;, a good Solution sentence might be &#8220;Use CoffeeScript&#8217;s array range subscripts, or JavaScript&#8217;s slice function.&#8221;</li>
+
+<li><strong>Discussion</strong> Here you should explain why your solution works, or give further examples such as edge cases. If your solution can break on some edge cases, be sure to note them here. For example, if a percentage function crashes when given a zero, you could note this in the discussion and give a workaround. NOTE: If your solution has really dangerous edge cases, so dangerous that you would include them in the solution, please consider whether your recipe should be included at all. Remember, this Cookbook is for good code!</li>
+</ul>
+
+<h2 id='copyright_issues'>Copyright Issues</h2>
+
+<p>Do not post code that is copyrighted by another user, unless you have permission to use that code AND to relicense that code under the <a href='/license'>CC BY 3.0</a> license. If you DO have permission and the author would like credit, please add them to the <a href='/authors'>authors</a> page.</p>
+
+<p>Also, just a stylistic note, please do not yank code directly from <a href='http://coffeescript.org/'>http://coffeescript.org/</a> and post it with little or no discussion. The CoffeeScript Cookbook is not affiliated with them. We think they&#8217;re awesome and want them to like us, too! Make sure that anything taken from <a href='http://coffeescript.org/'>http://coffeescript.org/</a> is permissible use and that it stands alone as a valid recipe. If the recipe is too terse, consider adding more examples and discussion.</p>
+
+<h2 id='tag_the_page_with_jekyll_frontmatter'>Tag the page with Jekyll frontmatter</h2>
+
+<p>&#8230;that&#8217;s a lot of fancy words that mean &#8220;don&#8217;t forget to put the layout, chapter and page title at the top of the file in a YAML block&#8221;. For example, the string interpolation page begins with</p>
+<div class='highlight'><pre><code class='text'>---
+layout: recipe
+title: String Interpolation
+chapter: Strings
+---
+</code></pre></div>
+<h2 id='use_liquid_highlighting_templates'>Use Liquid highlighting templates</h2>
+
+<p>Turn on syntax highlighting for CoffeeScript with <code>highlight coffeescript</code>.</p>
+
+<p>test2</p>
+
+<p>&lbrace;% highlight coffeescript %&rbrace; &#35; Calculate the square of a number square = (x) -&gt; x * x</p>
+
+<p>square(16) &lbrace; 256 &lbrace;% endhighlight %&rbrace;</p>
+
+<p>This produces the following:</p>
+<div class='highlight'><pre><code class='coffeescript'><span class='c1'># Calculate the square of a number</span>
+<span class='nv'>square = </span><span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>*</span> <span class='nx'>x</span>
+
+<span class='nx'>square</span><span class='p'>(</span><span class='mi'>16</span><span class='p'>)</span>
+<span class='c1'># =&gt; 256</span>
+</code></pre></div>
+<h2 id='include_output'>Include Output</h2>
+
+<p>After writing an important expression, show the reader what the output would be by adding it with a <code># =&gt;</code> on the following line. Once we get automated script testing working up in this joint, we&#8217;ll actually load up your recipe snippets and evaluate its expressions against the output comment you wrote. (In other words, <code># =&gt;</code> tells the reader what the output will be, but it tells automated checker what the assertEquals should be)</p>
+<div class='highlight'><pre><code class='coffeescript'><span class='c1'># right</span>
+<span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>].</span><span class='nx'>map</span> <span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>*</span> <span class='mi'>2</span>
+<span class='c1'># =&gt; [ 2, 4, 6 ]</span>
+
+<span class='c1'># very wrong!</span>
+<span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>].</span><span class='nx'>map</span> <span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>*</span> <span class='mi'>2</span>
+
+<span class='c1'># right; only add for important/results statements</span>
+<span class='nv'>evens = </span><span class='nx'>x</span> <span class='k'>for</span> <span class='nx'>x</span> <span class='k'>in</span> <span class='p'>[</span><span class='mi'>0</span><span class='p'>..</span><span class='mi'>10</span><span class='p'>]</span> <span class='k'>by</span> <span class='mi'>2</span>
+<span class='nx'>evens</span><span class='p'>.</span><span class='nx'>some</span> <span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>==</span> <span class='mi'>6</span>
+<span class='c1'># =&gt; true</span>
+
+<span class='c1'># less wrong; may require tweaking the automatic checker</span>
+<span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>].</span><span class='nx'>map</span> <span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>*</span> <span class='mi'>2</span> <span class='c1'># =&gt; [ 2, 4, 6 ]</span>
+
+<span class='c1'># less wrong (possibly not wrong at all--the output merely does not match what the coffee interpreter renders)</span>
+<span class='p'>[</span><span class='mi'>1</span><span class='p'>,</span><span class='mi'>2</span><span class='p'>,</span><span class='mi'>3</span><span class='p'>].</span><span class='nx'>map</span> <span class='nf'>(x) -&gt;</span> <span class='nx'>x</span> <span class='o'>*</span> <span class='mi'>2</span>
+<span class='c1'># =&gt; [2,4,6]</span>
+</code></pre></div>
+<p>Not all snippets evaluate to something useful. For example, array.forEach has side effects but does not return anything. Also, the console.log() and alert() commands are also side-effect-only commands that return nothing. When possible, try to have your snippets evaluate to something inspectable, and leave displaying to the console or browser out of it. (Unless your snippet is <em>about</em> displaying to the console or browser.)</p>
+
+<p>When in doubt about what output to show, try evaluating your snippet in the coffee interpreter and see what IT thinks. Ideally your output should match, or at least be machine-comparable.</p>
+
+<h1 id='grindy_howtos'>Grindy HOWTOs</h1>
+
+<h2 id='how_to_add_a_recipe'>How to Add a Recipe</h2>
+
+<p>Create a new markdown page (or copy the <a href='/recipe-template'>Recipe Template</a>. The filename should be about the problem, e.g. <code>finding-last-day-of-the-month.md</code> or <code>reversing-arrays.md</code>. In your file, start with the following template:</p>
+<div class='highlight'><pre><code class='text'>---
+layout: recipe
+title: Title of The Recipe
+chapter: Chapter Name
+---
+
+## Problem
+
+You have a problem.
+
+## Solution
+
+Do this about it.
+
+## Discussion
+
+Here&#39;s why.
+</code></pre></div>
+<p>One fussy little bit, the chapter name should match the directory the chapter is in, otherwise the page won&#8217;t render correctly. For example, if you&#8217;re writing a recipe for arrays, make sure the chapter is &#8220;Arrays&#8221;, not &#8220;arrays&#8221; or &#8220;aray&#8221; &#8230;or especially not &#8220;Chapter Name&#8221;.</p>
+
+<h2 id='how_to_add_a_chapter'>How to Add a Chapter</h2>
+
+<ul>
+<li>Open chapters/index.html and your chapter&#8217;s name to the yaml list of chapters.</li>
+
+<li>cd into chapters/ and create the directory for the chapter name. Downcase the name and replace spaces with underscores.</li>
+
+<li>add an index.html file that uses <code>layout: chapter</code>. For convenience, just copy the index.html from another chapter and update the yaml frontmatter to reflect the name of your new chapter.</li>
+</ul>
+
+<p>For example, to add a chapter called &#8220;Dates and Times&#8221;, you would add it to the chapters array:</p>
+<div class='highlight'><pre><code class='yaml'><span class='l-Scalar-Plain'>chapters</span><span class='p-Indicator'>:</span>
+<span class='p-Indicator'>-</span> <span class='l-Scalar-Plain'>Syntax</span>
+<span class='p-Indicator'>-</span> <span class='l-Scalar-Plain'>Objects</span>
+<span class='p-Indicator'>-</span> <span class='l-Scalar-Plain'>Arrays</span>
+<span class='p-Indicator'>-</span> <span class='l-Scalar-Plain'>Dates and Times</span>
+</code></pre></div>
+<p>&#8230;and then create that chapter in the file system:</p>
+<div class='highlight'><pre><code class='bash'><span class='nb'>cd </span>chapters
+mkdir dates_and_times
+</code></pre></div>
+<p>Now create a new page in that chapter (remember to add its YAML front matter) and once jekyll regenerates the chapter index, your new page should appear.</p>
+
+<h1 id='faq'>FAQ</h1>
+
+<h2 id='i_have_a_weird_recipe_should_i_share_it'>I Have a Weird Recipe. Should I Share It?</h2>
+
+<p>Maybe! The real question is, is it really useful, or is it just clever? If you have a formatter for a weird Albanian GIS format, that&#8217;s a real problem that almost nobody would ever have &#8211; but when somebody DOES have that problem, they REALLY need a solution. If you have a bit shifting trick that can swap two numbers using three xor-equals operations, that&#8217;s a really clever solution but it&#8217;s not very good CoffeeScript. (For one thing, <code>x ^= y ^= x ^= y</code> is not idiomatic, while <code>[x,y]=[y,x]</code> is. For another, there&#8217;s a bug in that code. And once you fix it, there&#8217;s another bug caused by extrapolating this register trick to a reference-based language where &#8211; look, it&#8217;s just a bad idea, okay?)</p>
+
+<p>If you have a cool but weird recipe, ask yourself if a reader would genuinely find it useful. Here are two very good questions to consider:</p>
+
+<ul>
+<li>Does it really solve a problem that an actual person might have?</li>
+
+<li>If somebody really does have that problem, would your recipe really be the best solution?</li>
+</ul>
+
+<p>If the answer to either question is no, you might have some code that is a &#8220;clever solution in search of a problem&#8221;. If in doubt, ask.</p>
+
+<h2 id='what_if_my_recipe_is_inefficienttoo_bigtoo_slow'>What If My Recipe is Inefficient/Too Big/Too Slow?</h2>
+
+<p>If it solves a problem to which the alternative is to <em>not</em> solve the problem, share it. Let the reader decide if they want to use it. Sometimes we want tight efficient code, other times we want a robust featureset. If the code has abysmal performance characteristics, be sure to warn the reader in the Discussion.</p>
+
+<h2 id='can_i_edit_an_existing_recipe'>Can I Edit An Existing Recipe?</h2>
+
+<p>Yes. Please improve anything and everything! Be sure to test your changes and make sure that your solution really is better.</p>
+
+<h2 id='i_have_a_really_efficient_solution_but_its_not_as_readable_as_the_existing_recipe_should_i_add_it'>I Have a Really Efficient Solution, But It&#8217;s Not As Readable As the Existing Recipe. Should I Add It?</h2>
+
+<p>See the &#8220;Weird Recipe&#8221; note above. Do real people in the real world ever hit the performance constraint? If so, then by all means, add your strategy to the existing solution, and be sure to explain why your solution is not idiomatic. If a reader really has that problem, they&#8217;ll be glad for the extra options.</p>
+
+<h2 id='i_have_a_problemsolution_but_its_basically_just_javascript_should_i_add_it'>I Have A Problem/Solution, But It&#8217;s Basically Just JavaScript. Should I Add It?</h2>
+
+<p>Yes! CoffeeScript compiles to JavaScript, and that means that some of its functionality comes straight from JavaScript. (For example, see <a href='/chapters/arrays/reversing-arrays'>Reversing Arrays</a>.) But if you&#8217;re programming in CoffeeScript and you need to reverse an array, this Cookbook should stand ready to tell you it&#8217;s available to you in CoffeeScript &#8211; even if it&#8217;s just a straight call into a JavaScript library.</p>
+
+<h2 id='i_found_a_typo_is_that_enough_of_a_fix_does_that_count'>I Found a Typo. Is That Enough of a Fix? Does That Count?</h2>
+
+<p>Absolutely!</p></article>
+
+        <footer class="footer content-block">
+          <p>Don't see a recipe you want? See an entire missing chapter? Add it yourself by reading the <a href="/contributing">Contributor's Guide</a>, or request it by adding it to <a href="/wanted-recipes">Wanted Recipes</a>.</p>
+          <p>This book is a fork of the original <a href="http://coffeescriptcookbook.com/">Coffeescript Cookbook</a></p>
+          <a href="/license"><img src="/images/cc_by_badge.png" /></a>
+        </footer>
+
+      </section>
+
+    </section>
+
+    <aside id="sidebar">
+
+      <section class="sidebar-block block-short">
+        <nav class="navigation pages-nav home-nav">
+          <h6><a class="nav-link" href="/"><span class="entypo">&oacute;</span>Ember.js Cookbook</a></h6>
+          <small class="thin dimmed">(last updated 24 December, 2012)</small>
+        </nav>
+      </section>
+
+      <section class="sidebar-block">
+        <nav class="navigation pages-nav">
+          <ul class="plain-list inline-list">
+            <li><a class="nav-link" href="/contributing"><span class="entypo">6</span>Contribute</a></li>
+            <li><a class="nav-link" href="/authors"><span class="entypo">,</span>Authors</a></li>
+            <li><a class="nav-link" href="/license"><span class="entypo">&copy;</span>License</a></li>
+          </ul>
+        </nav>
+      </section>
+
+      <section class="sidebar-block">
+        <h5 class="sidebar-title">Chapters Index</h5>
+        <ol class="navigation chapters-list">
+          
+            
+            
+            <li class="chapter">
+              <div class="sidebar-subtitle"><strong><a class="chapter-title" href="/chapters/basics">Basics</a></strong></div>
+              <ul class="pseudo-list recipes-list">
+                
+                  
+                
+                  
+                
+                  
+                    
+                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/basics/action_targetting_controller_or_view">action targetting controller or view</a></li>
+                    
+                  
+                
+                  
+                    
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            </li>
+          
+            
+            
+            <li class="chapter">
+              <div class="sidebar-subtitle"><strong><a class="chapter-title" href="/chapters/ember_data">Ember Data</a></strong></div>
+              <ul class="pseudo-list recipes-list">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+              </ul>
+            </li>
+          
+        </ol>
+      </section>
+
+    </aside>
+
+    <script type="text/javascript" src="/js/scripts.js"></script>
+
+ </body>
+</html>
+
