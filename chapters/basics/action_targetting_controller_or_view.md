@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: action targetting controller or view
+title: Action targetting controller or view
 chapter: Basics
 ---
 
