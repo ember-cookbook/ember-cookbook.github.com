@@ -17,12 +17,14 @@ to `/people` instead of `/persons`.
 Under your adapter definition, add the `plurals` containing a hash with
 whatever model names you want to customize:
 
-    App.store = DS.Store.create({
-      adapter: DS.RESTAdapter.create({
-        plurals: {
-          'person': 'people'
-        }
-      })
-    });
+{% highlight javascript %}
+App.store = DS.Store.create({
+  adapter: DS.RESTAdapter.create({
+    plurals: {
+      'person': 'people'
+    }
+  })
+});
+{% endhighlight %}
 
 Although the model name is `Person`, use `person` as the hash key.
