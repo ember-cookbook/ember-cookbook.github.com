@@ -24,13 +24,12 @@
 <h2 id='solution'>Solution</h2>
 
 <p>Under your REST adapter definition, add the <code>namespace</code> key like the following:</p>
-
-<pre><code>App.store = DS.Store.create({
-  adapter: DS.RESTAdapter.create({
-    namespace: &#39;superadmin&#39;
-  })
-});</code></pre>
-
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>store</span> <span class='o'>=</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>Store</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
+  <span class='nx'>adapter</span><span class='o'>:</span> <span class='nx'>DS</span><span class='p'>.</span><span class='nx'>RESTAdapter</span><span class='p'>.</span><span class='nx'>create</span><span class='p'>({</span>
+    <span class='nx'>namespace</span><span class='o'>:</span> <span class='s1'>&#39;superadmin&#39;</span>
+  <span class='p'>})</span>
+<span class='p'>});</span>
+</code></pre></div>
 <p>From now on, every call to the server will preppend <code>/superadmin</code> in the URL.</p>
         </article>
 
