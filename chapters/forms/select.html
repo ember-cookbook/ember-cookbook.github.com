@@ -44,10 +44,10 @@
 <span class='p'>});</span>
 </code></pre></div><div class='highlight'><pre><code class='html'><span class='nt'>&lt;label&gt;</span>
   Pick your burger:
-  
+  {{view Ember.Select valueBinding=&quot;App.burger.names&quot; contentBinding=&quot;App.burgers&quot; multiple=&quot;true&quot;}}
 <span class='nt'>&lt;/label&gt;</span>
 
-<span class='nt'>&lt;p&gt;</span>You picked: &quot;&quot;<span class='nt'>&lt;/p&gt;</span>
+<span class='nt'>&lt;p&gt;</span>You picked: &quot;{{#each burger in App.burger.names}}{{burger}}{{/each}}&quot;<span class='nt'>&lt;/p&gt;</span>
 </code></pre></div>
 <p><a href='http://jsfiddle.net/darthdeus/qgpK8/6/'>Here&#8217;s a JSFiddle</a></p>
         </article>
