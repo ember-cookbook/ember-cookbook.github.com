@@ -45,10 +45,10 @@ App.burger = Em.Object.create({
 {% highlight html %}
 <label>
   Pick your burger:
-  {{view Ember.Select valueBinding="App.burger.names" contentBinding="App.burgers" multiple="true"}}
+  {% raw %}{{view Ember.Select valueBinding="App.burger.names" contentBinding="App.burgers" multiple="true"}}{% endraw %}
 </label>
 
-<p>You picked: "{{#each burger in App.burger.names}}{{burger}}{{/each}}"</p>
+<p>You picked: "{% raw %}{{#each burger in App.burger.names}}{{burger}}{{/each}}{% endraw %}"</p>
 {% endhighlight %}
 
 [Here's a JSFiddle](http://jsfiddle.net/darthdeus/qgpK8/6/)
