@@ -10,7 +10,7 @@ You need to give the user option to select from multiple choices.
 
 ## Solution
 
-Use `Ember.Select` class either directly, or by subclassing
+Use `Ember.Select`
 
 {% highlight javascript %}
 App.burgers = ["double cheesburger", "mini-burger", "triple bacon
