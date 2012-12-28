@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Code Reuse on Client and Server</title>
+    <title>Ember.js Cookbook &raquo; Calling a route programatically</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -14,80 +14,19 @@
       <section class="content">
 
         <article class="content-block recipe-content">
-          <h1>Code Reuse on Client and Server</h1>
+          <h1>Calling a route programatically</h1>
           <h2 id='problem'>Problem</h2>
 
-<p>You have created some functionality in CoffeeScript that you wish to use on the client with a web browser and on the server with Node.js.</p>
+<p>You need to transition to a different route programatically, as if you did <code>{{action gotoUsers}}</code>.</p>
 
 <h2 id='solution'>Solution</h2>
 
-<p>Export the functionality in the following manner:</p>
-<div class='highlight'><pre><code class='coffeescript'><span class='c1'># simpleMath.coffee</span>
-
-<span class='c1'># these methods are private</span>
-<span class='nv'>add = </span><span class='nf'>(a, b) -&gt;</span>
-	<span class='nx'>a</span> <span class='o'>+</span> <span class='nx'>b</span>
-
-<span class='nv'>subtract = </span><span class='nf'>(a, b) -&gt;</span>
-	<span class='nx'>a</span> <span class='o'>-</span> <span class='nx'>b</span>
-
-<span class='nv'>square = </span><span class='nf'>(x) -&gt;</span>
-	<span class='nx'>x</span> <span class='o'>*</span> <span class='nx'>x</span>
-
-<span class='c1'># create a namespace to export our public methods</span>
-<span class='nv'>SimpleMath = </span><span class='nx'>exports</span><span class='o'>?</span> <span class='o'>and</span> <span class='nx'>exports</span> <span class='o'>or</span> <span class='vi'>@SimpleMath = </span><span class='p'>{}</span>
-
-<span class='c1'># items attached to our namespace are available in Node.js as well as client browsers</span>
-<span class='k'>class</span> <span class='nx'>SimpleMath</span><span class='p'>.</span><span class='nx'>Calculator</span>
-	<span class='nv'>add: </span><span class='nx'>add</span>
-	<span class='nv'>subtract: </span><span class='nx'>subtract</span>
-	<span class='nv'>square: </span><span class='nx'>square</span>
+<p>Get the router instance from the application and call <code>send</code> on it with the required transition name</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>get</span><span class='p'>(</span><span class='s2'>&quot;router&quot;</span><span class='p'>).</span><span class='nx'>send</span><span class='p'>(</span><span class='s2'>&quot;gotoUsers&quot;</span><span class='p'>);</span>
 </code></pre></div>
-<h2 id='discussion'>Discussion</h2>
-
-<p>In the above example, we create a new namespace called SimpleMath. If <code>export</code> is available, our class is exported as a Node.js module. If <code>export</code> is <em>not</em> available, then SimpleMath is added to the global namespace and available to our web page.</p>
-
-<p>In Node.js, we can include our module using the <code>require</code> command.</p>
-<div class='highlight'><pre><code class='console'><span class='gp'>$</span> node
-
-<span class='gp'>&gt;</span> var <span class='nv'>SimpleMath</span> <span class='o'>=</span> require<span class='o'>(</span><span class='s1'>&#39;./simpleMath&#39;</span><span class='o'>)</span>;
-<span class='go'>undefined</span>
-<span class='gp'>&gt;</span> var <span class='nv'>Calc</span> <span class='o'>=</span> new SimpleMath.Calculator<span class='o'>()</span>;
-<span class='go'>undefined</span>
-<span class='gp'>&gt;</span> console.log<span class='o'>(</span><span class='s2'>&quot;5 + 6 = &quot;</span>, Calc.add<span class='o'>(</span>5, 6<span class='o'>))</span>;
-<span class='go'>5 + 6 =  11</span>
-<span class='go'>undefined</span>
-<span class='gp'>&gt;</span> 
+<p>Or with a context</p>
+<div class='highlight'><pre><code class='javascript'><span class='nx'>App</span><span class='p'>.</span><span class='nx'>get</span><span class='p'>(</span><span class='s2'>&quot;router&quot;</span><span class='p'>).</span><span class='nx'>send</span><span class='p'>(</span><span class='s2'>&quot;showUser&quot;</span><span class='p'>,</span> <span class='nx'>App</span><span class='p'>.</span><span class='nx'>currentUser</span><span class='p'>);</span>
 </code></pre></div>
-<p>In our web page, we can include our module using by including it as a script.</p>
-<div class='highlight'><pre><code class='html'><span class='cp'>&lt;!DOCTYPE HTML&gt;</span>
-<span class='nt'>&lt;html</span> <span class='na'>lang=</span><span class='s'>&quot;en-US&quot;</span><span class='nt'>&gt;</span>
-<span class='nt'>&lt;head&gt;</span>
-	<span class='nt'>&lt;meta</span> <span class='na'>charset=</span><span class='s'>&quot;UTF-8&quot;</span><span class='nt'>&gt;</span>
-	<span class='nt'>&lt;title&gt;</span>SimpleMath Module Example<span class='nt'>&lt;/title&gt;</span>
-	<span class='nt'>&lt;script </span><span class='na'>src=</span><span class='s'>&quot;http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js&quot;</span><span class='nt'>&gt;&lt;/script&gt;</span>
-	<span class='nt'>&lt;script </span><span class='na'>src=</span><span class='s'>&quot;simpleMath.js&quot;</span><span class='nt'>&gt;&lt;/script&gt;</span>
-	<span class='nt'>&lt;script&gt;</span>
-		<span class='nx'>jQuery</span><span class='p'>(</span><span class='nb'>document</span><span class='p'>).</span><span class='nx'>ready</span><span class='p'>(</span><span class='kd'>function</span>	<span class='p'>(){</span>
-			<span class='kd'>var</span> <span class='nx'>Calculator</span> <span class='o'>=</span> <span class='k'>new</span> <span class='nx'>SimpleMath</span><span class='p'>.</span><span class='nx'>Calculator</span><span class='p'>();</span>
-			<span class='kd'>var</span> <span class='nx'>result</span> <span class='o'>=</span> <span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;&lt;li&gt;&#39;</span><span class='p'>).</span><span class='nx'>html</span><span class='p'>(</span><span class='s2'>&quot;5 + 6 = &quot;</span> <span class='o'>+</span> <span class='nx'>Calculator</span><span class='p'>.</span><span class='nx'>add</span><span class='p'>(</span><span class='mi'>5</span><span class='p'>,</span> <span class='mi'>6</span><span class='p'>));</span>
-			<span class='nx'>$</span><span class='p'>(</span><span class='s1'>&#39;#SampleResults&#39;</span><span class='p'>).</span><span class='nx'>append</span><span class='p'>(</span><span class='nx'>result</span><span class='p'>);</span>	
-		<span class='p'>});</span>
-	<span class='nt'>&lt;/script&gt;</span>
-<span class='nt'>&lt;/head&gt;</span>
-<span class='nt'>&lt;body&gt;</span>
-	<span class='nt'>&lt;h1&gt;</span>A SimpleMath Example<span class='nt'>&lt;/h1&gt;</span>
-	<span class='nt'>&lt;ul</span> <span class='na'>id=</span><span class='s'>&quot;SampleResults&quot;</span><span class='nt'>&gt;&lt;/ul&gt;</span>
-<span class='nt'>&lt;/body&gt;</span>
-<span class='nt'>&lt;/html&gt;</span>
-</code></pre></div>
-<p>Result:</p>
-
-<h1 id='a_simplemath_example'>A SimpleMath Example</h1>
-
-<ul>
-<li>5 + 6 = 11</li>
-</ul>
         </article>
 
         <footer class="footer">
@@ -146,7 +85,7 @@
                 
                   
                     
-                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/basics/calling_a_route_programatically">Calling a route programatically</a></li>
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/basics/calling_a_route_programatically">Calling a route programatically</a></li>
                     
                   
                 
