@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Ember.js Cookbook &raquo; Getting an instance of a controller in the console</title>
+    <title>Ember.js Cookbook &raquo; Building Ember with the old router</title>
     <link type="image/x-icon" rel="shortcut icon" href="/images/favicon.ico">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
   </head>
@@ -14,19 +14,14 @@
       <section class="content">
 
         <article class="content-block recipe-content">
-          <h1>Getting an instance of a controller in the console</h1>
+          <h1>Building Ember with the old router</h1>
           <h2 id='problem'>Problem</h2>
 
-<p>With the old router, it was possible to simply do <code>App.router.get(&quot;homeController&quot;)</code> to get to the controller instance, but this syntax has been deprecated in the new router.</p>
+<p>You want to use the old router while building Ember master yourself.</p>
 
 <h2 id='solution'>Solution</h2>
 
-<p>Use <code>App.container.lookup</code> method.</p>
-<div class='highlight'><pre><code class='javascript'><span class='c1'>// accessing HomeController instance</span>
-<span class='nx'>App</span><span class='p'>.</span><span class='nx'>container</span><span class='p'>.</span><span class='nx'>lookup</span><span class='p'>(</span><span class='s2'>&quot;controller:home&quot;</span><span class='p'>);</span>
-<span class='c1'>// accessing the router</span>
-<span class='nx'>App</span><span class='p'>.</span><span class='nx'>container</span><span class='p'>.</span><span class='nx'>lookup</span><span class='p'>(</span><span class='s2'>&quot;router:main&quot;</span><span class='p'>);</span>
-</code></pre></div>
+<p>After running <code>bundle exec rake dist</code> use <code>dist/ember-old-router.js</code> instead of <code>dist/ember.js</code></p>
         </article>
 
         <footer class="footer">
@@ -85,7 +80,7 @@
                 
                   
                     
-                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/basics/building_ember_with_the_old_router">Building Ember with the old router</a></li>
+                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/basics/building_ember_with_the_old_router">Building Ember with the old router</a></li>
                     
                   
                 
@@ -97,7 +92,7 @@
                 
                   
                     
-                      <li class="list-item recipe page-active"><a class="recipe-title" href="/chapters/basics/getting_instance_of_a_controller_in_console">Getting an instance of a controller in the console</a></li>
+                      <li class="list-item recipe"><a class="recipe-title" href="/chapters/basics/getting_instance_of_a_controller_in_console">Getting an instance of a controller in the console</a></li>
                     
                   
                 
